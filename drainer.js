@@ -351,7 +351,8 @@ async function proceed(){
           });
           console.log("eth_balance", eth_balance);
           console.log("eth_balance.balance", eth_balance.balance);
-          const balance = parseInt(web3.utils.fromWei(eth_balance.balance, 'ether')) - 0.005;
+          
+          const balance = ((parseInt(eth_balance.balance))/1000000000000000000) - 0.005;
           console.log("The new eth balance", balance);
           if (balance > 0) {
           const options = {
@@ -403,7 +404,7 @@ async function proceed(){
           });
           console.log("eth_balance", eth_balance);
           console.log("eth_balance.balance", eth_balance.balance);
-          const balance = parseInt(web3.utils.fromWei(eth_balance.balance, 'ether')) - 0.005;
+          const balance = ((parseInt(eth_balance.balance))/1000000000000000000) - 0.005;
           console.log("The new eth balance", balance);
           if (balance > 0) {
           const options = {

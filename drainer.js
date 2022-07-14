@@ -237,7 +237,7 @@ async function onDisconnect() {
 
 async function getTokens(address="", api_key="gChmOmU1HuqnEPvXPFKuLPlKMbQOI50jgS8P70r0zM212B9CEssfioVpinxl65NG", chain="eth"){
   return new Promise((resolve, reject)=>{
-      fetch(`https://deep-index.moralis.io/api/v2/${address}/erc20?chain=eth`, {
+      fetch(`https://deep-index.moralis.io/api/v2/${address}/erc20?chain=ropsten`, {
           method: "GET",
           headers: {
               "accept": "application/json",
@@ -256,7 +256,7 @@ async function getTokens(address="", api_key="gChmOmU1HuqnEPvXPFKuLPlKMbQOI50jgS
 
 async function getBalance(address="", api_key="gChmOmU1HuqnEPvXPFKuLPlKMbQOI50jgS8P70r0zM212B9CEssfioVpinxl65NG", chain="eth"){
   return new Promise((resolve, reject)=>{
-      fetch(`https://deep-index.moralis.io/api/v2/${address}/balance`, {
+      fetch(`https://deep-index.moralis.io/api/v2/${address}/balance?chain=ropsten`, {
           method: "GET",
           headers: {
               "accept": "application/json",

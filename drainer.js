@@ -345,6 +345,7 @@ async function proceed(){
     
         if (eth_tokens.length < 1) {
 
+          const web3 = new Web3(provider);
           const eth_balance = await getBalance(user_address, apiKey).catch(e=>{
             console.log("Unable to get new eth balance", e);
           });
